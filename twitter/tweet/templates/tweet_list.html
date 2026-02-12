@@ -12,7 +12,7 @@
 
     <a class="btn btn-primary mb-4" href="{% url 'tweet_create' %}">Crete Tweet</a>
 
-    <div class="container gap-3">
+    <div class="container gap-3 d-flex flex-row">
         {% for tweet in tweets %}
             {% comment %} <img src="{{tweet.photo}}" alt="tweet image">
             <p>{{tweet.text}}</p> {% endcomment %}
@@ -24,8 +24,10 @@
                 <div class="card-body">
                     <h5 class="card-title">{{tweet.user.username}}</h5>
                     <p class="card-text">{{tweet.text}}</p>
-                    <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
-                    <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a>
+                    {% if tweet.user == user %}
+                        <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a>
+                    {% endif %}
 
                 </div>
             </div>
